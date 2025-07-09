@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Super Electronics</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #F8F9FA;
+      color: #333333;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .banner {
+      background-color: #F8F9FA;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .banner h2 {
+      color: #007BFF;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .banner p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .btn {
+      background-color: #00D084;
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .contact {
+      background-color: #ffffff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .contact h3 {
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+
+    footer {
+      background-color: #333333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+
+    /* Rating stars */
+    .rating {
+      margin: 30px auto;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .stars {
+      display: inline-block;
+    }
+
+    .star {
+      font-size: 2.5em;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.3s;
+      user-select: none;
+    }
+
+    .star.hover,
+    .star.selected {
+      color: #00D084;
+    }
+
+    @media (max-width: 600px) {
+      header h1, .banner h2 {
+        font-size: 1.8em;
+      }
+      .banner p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Super Electronics</h1>
+    <p>LED & LCD Repair Experts – 25+ Years of Experience</p>
+  </header>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <h2>Welcome to Super Electronics</h2>
+    <p>
+      At <strong>Super Electronics</strong>, we specialize in the repair of all types of 
+      <span style="color: #007BFF;">LED</span> and <span style="color: #007BFF;">LCD</span> displays, backed by 25 years of hands-on experience. 
+      Whether it's a minor issue or a major fault, our skilled technicians can handle it with precision.
+      We're especially known for our expertise in <strong style="color: #00D084;">LED panel repairs</strong> using advanced bonding machine technology.
+      For fast, reliable, and affordable service, Super Electronics is your go-to repair shop.
+    </p>
+    <a href="#contact" class="btn">Contact Us</a>
+  </section>
+
+  <!-- Rating Section -->
+  <section class="rating">
+    <h3>If you like our work, please rate us:</h3>
+    <div class="stars" role="radiogroup" aria-label="Star rating">
+      <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">&#9733;</span>
+      <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+      <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+      <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+      <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+    </div>
+    <p id="rating-value" style="margin-top: 15px; font-size: 1.1em; color: #007BFF;"></p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <h3>Get in Touch</h3>
+    <p><strong>Phone:</strong> 94171-17638</p>
+    <p><strong>Address:</strong> Near Goyal Hospital,Dehliz Road,Ahmedgarh(148021),India</p>
+    <p><strong>Email:</strong> contact@superelectronics.com (optional)</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Super Electronics. All rights reserved.
+  </footer>
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('rating-value');
+    let selectedRating = 0;
+
+    stars.forEach((star, idx) => {
+      star.addEventListener('mouseover', () => {
+        highlightStars(idx);
+      });
+
+      star.addEventListener('mouseout', () => {
+        highlightStars(selectedRating - 1);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = idx + 1;
+        setRating(selectedRating);
+      });
+
+      // Keyboard support
+      star.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectedRating = idx + 1;
+          setRating(selectedRating);
+        }
+      });
+    });
+
+    function highlightStars(index) {
+      stars.forEach((star, i) => {
+        if (i <= index) {
+          star.classList.add('hover');
+        } else {
+          star.classList.remove('hover');
+        }
+      });
+    }
+
+    function setRating(rating) {
+      stars.forEach((star, i) => {
+        if (i < rating) {
+          star.classList.add('selected');
+          star.setAttribute('aria-checked', 'true');
+          star.tabIndex = 0;
+        } else {
+          star.classList.remove('selected');
+          star.setAttribute('aria-checked', 'false');
+          star.tabIndex = -1;
+        }
+      });
+      ratingValue.textContent = `You rated us ${rating} star${rating > 1 ? 's' : ''}. Thank you!`;
+    }
+  </script>
+
+</body>
+</html>
